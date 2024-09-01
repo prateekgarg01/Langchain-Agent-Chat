@@ -28,7 +28,7 @@ Chat is also utilizing **GROQ LLAMA3** LLM model.
 """
 
 # Sidebar for Settings
-st.sidebar.title("Settings")
+with st.sidebar:
     groq_api_key=st.text_input("Groq API Key",type="password")
 #os.environ["GROQ_API_KEY"]=os.getenv("GROQ_API_KEY")
 
