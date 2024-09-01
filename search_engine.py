@@ -28,8 +28,9 @@ Chat is also utilizing **GROQ LLAMA3** LLM model.
 """
 
 # Sidebar for Settings
-#st.sidebar.title("Settings")
-os.environ["GROQ_API_KEY"]=os.getenv("GROQ_API_KEY")
+st.sidebar.title("Settings")
+    groq_api_key=st.text_input("Groq API Key",type="password")
+#os.environ["GROQ_API_KEY"]=os.getenv("GROQ_API_KEY")
 
 
 if "messages" not in st.session_state:
@@ -44,7 +45,7 @@ if prompt:=st.chat_input(placeholder="What is Machine Learning?"):
     st.session_state.messages.append({"role":"user","content":prompt})
     st.chat_message("user").write(prompt)
 
-    llm=ChatGroq(model="llama3-8b-8192",streaming=True)
+    llm=ChatGroq(groq_api_key=groq_api_key,model="llama3-8b-8192",streaming=True)
     tools=[search,arxiv,wiki]
     search_agent=initialize_agent(tools,llm,agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,handling_parsing_errors=False)
 
